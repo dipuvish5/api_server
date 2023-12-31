@@ -1,9 +1,14 @@
 version: 0.2
 
 env:
-  secrets-manager:
-    DOCKERHUB_PASS: deepakv123 # "/dockerhub/credentials:password" -- use aws secret manager
-    DOCKERHUB_USERNAME: dipuvish5 # "/dockerhub/credentials:username" -- use aws secret manager
+  # secrets-manager:
+  #   DOCKERHUB_PASS: "/dockerhub/credentials:password" -- using aws secret manager
+  #   DOCKERHUB_USERNAME: "/dockerhub/credentials:username" -- using aws secret manager
+  variables:
+    DOCKERHUB_USERNAME: "dipuvish5"
+    IMAGE_REPO_NAME: "nest_api_server"
+    IMAGE_TAG:  "latest"
+    DOCKERHUB_PASS: "deepakv123"
 
 phases:
   pre_build:
@@ -18,13 +23,13 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $DOCKERHUB_USERNAME/$IMAGE_REPO_NAME:$IMAGE_TAG
       # comment above line and use below line of code instead to use ecr instead of docker
       # - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker push $DOCKERHUB_USERNAME/$IMAGE_REPO_NAME:$IMAGE_TAG
       # comment above line and use below line of code instead to use ecr instead of docker
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG

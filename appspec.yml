@@ -2,42 +2,27 @@ version: 0.0
 
 os: linux
 
-env:
-  # secrets-manager:
-  #   DOCKERHUB_PASS: "/dockerhub/credentials:password" -- using aws secret manager
-  #   DOCKERHUB_USERNAME: "/dockerhub/credentials:username" -- using aws secret manager
-  variables:
-    DOCKERHUB_USERNAME: "dipuvish5"
-    IMAGE_REPO_NAME: "nest_api_server"
-    IMAGE_TAG:  "latest"
-    DOCKERHUB_PASS: "deepakv123"
-
 files:
-  - source: /
-    destination: /home/ec2-user/Deployment
-
-file_exists_behavior: OVERWRITE
 
 permissions:
-  - object: /home/ec2-user/Deployment
-    owner: ec2-user
-    group: ec2-user
 
 hooks:
-  ApplicationStop:
-    - location: scripts/kill_container.sh
-      timeout: 300
-      runas: ec2-user
   BeforeInstall:
-    - location: scripts/install_dependencies.sh
+    - location: scripts/code_deploy/before_install.sh
       timeout: 300
-      runas: ec2-user
-  # AfterInstall:
-  #   - location: scripts/load_image.sh
-  #     timeout: 10
-  #     runas: ec2-user
+      runas: root
+
+  AfterInstall:
+    - location: scripts/code_deploy/after_install.sh
+      timeout: 300
+      runas: root
+
   ApplicationStart:
-    # - location: scripts/start_server.sh
-    - location: scripts/start_container.sh
+    - location: scripts/code_deploy/application_start.sh
       timeout: 300
-      runas: ec2-user
+      runas: root
+
+  ApplicationStop:
+    - location: scripts/code_deploy/application_stop.sh
+      timeout: 300
+      runas: root

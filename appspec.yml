@@ -2,6 +2,16 @@ version: 0.0
 
 os: linux
 
+env:
+  # secrets-manager:
+  #   DOCKERHUB_PASS: "/dockerhub/credentials:password" -- using aws secret manager
+  #   DOCKERHUB_USERNAME: "/dockerhub/credentials:username" -- using aws secret manager
+  variables:
+    DOCKERHUB_USERNAME: "dipuvish5"
+    IMAGE_REPO_NAME: "nest_api_server"
+    IMAGE_TAG:  "latest"
+    DOCKERHUB_PASS: "deepakv123"
+    
 files:
 
 permissions:

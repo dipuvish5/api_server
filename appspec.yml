@@ -11,8 +11,9 @@ env:
     IMAGE_REPO_NAME: "nest_api_server"
     IMAGE_TAG:  "latest"
     DOCKERHUB_PASS: "deepakv123"
-    
-files:
+
+# Files section is not required because we are directly using docker and container and container has all the required files already
+# files: 
 
 permissions:
 

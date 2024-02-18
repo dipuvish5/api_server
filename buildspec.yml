@@ -10,6 +10,10 @@ env:
     IMAGE_TAG:  "latest"
     DOCKERHUB_PASS: "deepakv123"
 
+install:
+    runtime-versions:
+      docker: 20
+
 phases:
   pre_build:
     commands:

@@ -40,5 +40,4 @@ phases:
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - printf '[{"name":"your.task.definition.container.name","imageUri":"%s"}]'
   artifacts:
-    # Define artifacts here if you want to ensure there are no artifacts generated.
-    # Leaving it empty will skip artifact generation.
+    files: []  # Define an empty list of files

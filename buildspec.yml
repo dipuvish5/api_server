@@ -39,5 +39,5 @@ phases:
       # comment above line and use below line of code instead to use ecr instead of docker
       # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - printf '[{"name":"your.task.definition.container.name","imageUri":"%s"}]'
-  artifacts:
-    files: []  # Define an empty list of files
+artifacts:
+  files: []  # Define an empty list of files
